@@ -1,6 +1,6 @@
 # Kaggle Playground Series S3E26 -- Cirrhosis Patient Survival
 
-This is an autonomous run of my [auto-model-trainer](https://github.com/Hook12aaa/auto-model-trainer) plugin. I handed it the objective file and let it drive. It explored 5 architecture classes -- linear, tree_based, catboost, knn, and svm -- across 16 experiments plus a Caruana ensemble. A domain research agent tracked down the original UCI 418-patient cirrhosis dataset and appended it to the training data, which mattered because the rare CL class is only 3.5% of samples. It engineered 22 features, including a Mayo PBC risk score, a cholestasis composite, and a handful of clinical ratios.
+This solution was created by [auto-model-trainer](https://github.com/Hook12aaa/auto-model-trainer), a Claude Code plugin for autonomous ML training. Given the competition objective, it explored 5 architecture classes -- linear, tree_based, catboost, knn, and svm -- across 16 experiments plus a Caruana ensemble. A domain research agent tracked down the original UCI 418-patient cirrhosis dataset and appended it to the training data, which mattered because the rare CL class is only 3.5% of samples. It engineered 22 features, including a Mayo PBC risk score, a cholestasis composite, and a handful of clinical ratios.
 
 ## Competition
 
