@@ -1,0 +1,15 @@
+dataset:
+  train: ./train.csv
+  test: ./test.csv
+  target_column: Status
+
+competition:
+  metric: log_loss
+  metric_direction: minimize
+  submission_format:
+    id_column: id
+    prediction_column: Status_C,Status_CL,Status_D
+
+constraints:
+  max_iterations: 15
+  architecture_classes_minimum: 3

@@ -1,0 +1,17 @@
+[
+  {"exp_id": "exp_013", "parent_id": "exp_012", "parent_desc": "lightgbm d5",
+   "architecture_class": "tree_based", "model_type": "xgboost",
+   "hyperparameters": {"n_estimators": 800, "learning_rate": 0.02, "max_depth": 4, "subsample": 0.8, "colsample_bytree": 0.8, "reg_lambda": 2.0},
+   "use_original": true, "random_seed": 123, "config_delta_key": "reg_lambda",
+   "hypothesis": "Return tree refinement to the depth-3 optimum config under a new seed to confirm the tree class has settled (diminishing returns)."},
+  {"exp_id": "exp_014", "parent_id": "exp_013", "parent_desc": "xgboost optimum seed123",
+   "architecture_class": "tree_based", "model_type": "xgboost",
+   "hyperparameters": {"n_estimators": 800, "learning_rate": 0.02, "max_depth": 4, "subsample": 0.8, "colsample_bytree": 0.8, "reg_lambda": 2.5},
+   "use_original": true, "random_seed": 7, "config_delta_key": "reg_lambda",
+   "hypothesis": "Marginal L2 increase at the settled optimum; expected within 1% of the prior two tree depths."},
+  {"exp_id": "exp_015", "parent_id": "exp_014", "parent_desc": "xgboost optimum seed7",
+   "architecture_class": "tree_based", "model_type": "xgboost",
+   "hyperparameters": {"n_estimators": 800, "learning_rate": 0.02, "max_depth": 4, "subsample": 0.8, "colsample_bytree": 0.8, "reg_lambda": 1.5},
+   "use_original": true, "random_seed": 2024, "config_delta_key": "reg_lambda",
+   "hypothesis": "Third settled-optimum tree refinement; confirms the last three tree depths agree within 1% and the class is exhausted."}
+]

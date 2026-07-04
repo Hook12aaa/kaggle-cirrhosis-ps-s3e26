@@ -1,0 +1,143 @@
+{
+  "status": "PASS",
+  "dataset_path": "train.csv",
+  "dataset_mtime": 1699392284.0,
+  "timestamp": "2026-06-28T14:32:42.623110+00:00",
+  "mitigation_rounds": 0,
+  "domain_context": {
+    "inferred_domain": "Clinical hepatology / survival analysis of primary biliary cirrhosis (PBC) patients, derived from the Mayo Clinic 1974-1984 randomized placebo-controlled D-penicillamine trial; the task is multiclass prediction of patient outcome (alive/censored, transplanted, or dead) from baseline demographics, physical exam findings, and liver-function laboratory values.",
+    "column_semantics": {
+      "N_Days": "Follow-up time in days from study registration (baseline) to the recorded endpoint event (death, liver transplant) or to the last contact at which the patient was still alive/censored.",
+      "Drug": "Randomized treatment assignment in the trial, either the experimental copper-chelating agent D-penicillamine or Placebo.",
+      "Age": "Patient age expressed in DAYS at study registration (divide by ~365.25 to obtain years, typically ~26-78 years).",
+      "Sex": "Biological sex of the patient (M = male, F = female; PBC is strongly female-predominant, so most rows are F).",
+      "Ascites": "Presence of ascites, pathological fluid accumulation in the abdominal cavity, a sign of decompensated end-stage liver disease (Y/N).",
+      "Hepatomegaly": "Presence of an enlarged liver detected on physical examination (Y/N).",
+      "Spiders": "Presence of spider angiomata, cutaneous vascular lesions associated with chronic liver disease (Y/N).",
+      "Edema": "Severity of peripheral edema coded N = no edema/no diuretics, S = edema without diuretics or resolved by diuretics, Y = edema persisting despite diuretics (worst prognosis).",
+      "Bilirubin": "Serum total bilirubin in mg/dL; the single strongest prognostic lab in PBC, rising as the liver loses excretory capacity.",
+      "Cholesterol": "Serum total cholesterol in mg/dL, often elevated in cholestatic liver disease.",
+      "Albumin": "Serum albumin in g/dL, a marker of hepatic synthetic function that FALLS as liver function deteriorates (lower = worse).",
+      "Copper": "Urine copper in ug/day; accumulates due to impaired biliary copper excretion, tracking cholestasis severity.",
+      "Alk_Phos": "Serum alkaline phosphatase in U/L, a cholestatic enzyme markedly elevated in PBC due to bile-duct injury.",
+      "SGOT": "Serum glutamic-oxaloacetic transaminase (AST) in U/mL, a hepatocellular injury enzyme.",
+      "Tryglicerides": "Serum triglycerides in mg/dL, a lipid measure altered in cholestatic states.",
+      "Platelets": "Platelet count (~x1000/uL); falls with portal hypertension and hypersplenism (lower = more advanced disease).",
+      "Prothrombin": "Prothrombin time in seconds; prolongs as the failing liver produces fewer clotting factors (higher = worse).",
+      "Stage": "Histologic stage of disease (1-4) from liver biopsy reflecting fibrosis, where 4 indicates established cirrhosis (higher = more advanced)."
+    },
+    "known_relationships": [
+      "Cholestatic cluster co-moves upward: Bilirubin, Alk_Phos, urine Copper, and Cholesterol rise as bile flow is obstructed; Bilirubin and Copper are especially tied to prognosis.",
+      "Hepatic synthetic-failure cluster: low Albumin and prolonged Prothrombin both signal failing synthetic function and co-occur in advanced disease.",
+      "Portal-hypertension cluster: low Platelets, Ascites, Edema, and Spiders co-occur and mark decompensation; Ascites + diuretic-resistant Edema are the most ominous signs.",
+      "Histologic Stage 4 correlates with decompensation signs (high Bilirubin, low Platelets, low Albumin, Ascites).",
+      "These columns are the exact inputs to the validated Mayo PBC risk score and MELD-type scores (Bilirubin, Albumin, Prothrombin, Edema), known to predict death/transplant.",
+      "Higher Bilirubin, prolonged Prothrombin, low Albumin, Ascites/Edema, advanced Stage, and older Age push outcome toward D (death) or CL (transplant).",
+      "Drug effect is clinically weak: the original trial concluded D-penicillamine did NOT improve survival, so Drug is a low-signal feature."
+    ],
+    "external_data_candidates": [
+      "UCI ML Repository ID 878 'Cirrhosis Patient Survival Prediction' (https://archive.ics.uci.edu/dataset/878): the exact 418-patient original table this competition was synthesized from; identical schema. Appending its rows to train with an is_original flag is a standard winning tactic for S3E26.",
+      "Kaggle 'fedesoriano/cirrhosis-prediction-dataset' / 'joebeachcapital/cirrhosis-patient-survival-prediction': same UCI data repackaged.",
+      "R survival package 'pbc' (n=418): canonical academic source, maps column-for-column."
+    ],
+    "leakage_risks": [
+      "N_Days is follow-up duration mechanically entangled with the outcome, but it is provided in BOTH train and test so it must be used; treat as outcome-correlated and validate carefully.",
+      "id is a meaningless row index; never feed it as a feature.",
+      "When appending original UCI rows, verify no near-duplicate original rows leak test answers; keep augmented rows out of validation folds."
+    ],
+    "high_value_features": [
+      "Age_years = Age/365.25.",
+      "Mayo PBC / MELD-like prognostic index from log(Bilirubin), Albumin, log(Prothrombin), Age, Edema.",
+      "Log-transform right-skewed labs (Bilirubin, Alk_Phos, SGOT, Copper, Cholesterol, Tryglicerides).",
+      "Decompensation count: sum of Ascites=Y, Hepatomegaly=Y, Spiders=Y, Edema in {S,Y}.",
+      "Edema ordinal N<S<Y and diuretic-resistant binary.",
+      "Clinical ratios: Bilirubin/Albumin, SGOT/Platelets (APRI-style), Alk_Phos/Bilirubin.",
+      "Cholestasis composite from standardized Bilirubin + Alk_Phos + Copper.",
+      "Stage x lab interactions (Stage4 flag interacted with Bilirubin/Platelets)."
+    ]
+  },
+  "checks": {
+    "shape_and_size": {
+      "passed": true,
+      "samples": 7905,
+      "features": 18,
+      "samples_per_feature": 439.17
+    },
+    "data_types": {
+      "passed": true,
+      "columns_checked": 18,
+      "numeric_columns": [
+        "N_Days",
+        "Age",
+        "Bilirubin",
+        "Cholesterol",
+        "Albumin",
+        "Copper",
+        "Alk_Phos",
+        "SGOT",
+        "Tryglicerides",
+        "Platelets",
+        "Prothrombin",
+        "Stage"
+      ],
+      "categorical_columns": [
+        "Drug",
+        "Sex",
+        "Ascites",
+        "Hepatomegaly",
+        "Spiders",
+        "Edema"
+      ],
+      "coercion_failures": {},
+      "max_coercion_failure_rate": 0.0
+    },
+    "missing_values": {
+      "passed": true,
+      "columns_with_missing": 0,
+      "mitigations_applied": {}
+    },
+    "target_variable": {
+      "passed": true,
+      "name": "Status",
+      "dtype": "str",
+      "n_classes": 3,
+      "class_distribution": {
+        "C": 0.6281,
+        "D": 0.3371,
+        "CL": 0.0348
+      },
+      "missing_pct": 0.0
+    },
+    "duplicates": {
+      "passed": true,
+      "duplicate_rows": 0,
+      "duplicate_pct": 0.0
+    },
+    "distributions": {
+      "passed": true,
+      "high_skew_columns": [
+        "Bilirubin",
+        "Cholesterol",
+        "Copper",
+        "Alk_Phos",
+        "Tryglicerides"
+      ],
+      "zero_variance_columns": [],
+      "near_constant_columns": [
+        "Prothrombin",
+        "Stage"
+      ]
+    },
+    "correlations": {
+      "passed": true,
+      "redundant_pairs": [],
+      "leakage_suspects": [],
+      "high_vif_columns": []
+    },
+    "outliers": {
+      "passed": true,
+      "flagged_rows": 2385,
+      "flagged_pct": 30.1708
+    }
+  }
+}

@@ -1,0 +1,537 @@
+{
+  "primary_metric_key": "log_loss",
+  "metric_direction": "minimize",
+  "nodes": {
+    "exp_000": {
+      "exp_id": "exp_000",
+      "parent": null,
+      "depth": 0,
+      "architecture_class": "linear",
+      "model": "logistic_regression",
+      "config_hash": "9bd45e1030023ab9f28d9fe3f9efcd9a56c832fb724a55f9ca721ac0316462af",
+      "sha": "7fc7941bfddac52d77ab14dd51838d50154c8921db065b55c6c2013fbf18211b",
+      "status": "DONE",
+      "metrics": {
+        "log_loss": 0.5010591805097386,
+        "accuracy": 0.8072106261859583,
+        "train_log_loss": 0.4902124102110879
+      },
+      "trainable_params": 144,
+      "hypothesis": "Multinomial logistic regression establishes the interpretable performance floor.",
+      "worktree_path": ".auto-trainer/worktrees/exp_000/",
+      "fold_log_losses": [
+        0.4783517868846664,
+        0.5106663121838377,
+        0.4910684416554666,
+        0.5087906912623685,
+        0.5164186705623537
+      ]
+    },
+    "exp_001": {
+      "exp_id": "exp_001",
+      "parent": "exp_000",
+      "depth": 1,
+      "architecture_class": "linear",
+      "model": "logistic_regression",
+      "config_hash": "66209fc5beba20cf3895bd689391aa66d1ea1136627fe65835917b4702cff708",
+      "sha": "d440ef34ff35f857e3c6681c11557bc9a39de11d0be10dfcfe7437eb52924486",
+      "status": "DONE",
+      "metrics": {
+        "log_loss": 0.5008638385057704,
+        "accuracy": 0.8074636306135358,
+        "train_log_loss": 0.49034849952408555
+      },
+      "trainable_params": 144,
+      "hypothesis": "Stronger L2 (C=0.5) on the linear model probes whether regularization closes the gap before deeper architectures are tried.",
+      "worktree_path": ".auto-trainer/worktrees/exp_001/",
+      "fold_log_losses": [
+        0.4780520326326352,
+        0.5105977603093727,
+        0.49139514867638806,
+        0.5083087776028188,
+        0.5159654733076374
+      ],
+      "config_delta_key": "C",
+      "cv_folds": 5,
+      "evaluate_verdict": "INCONCLUSIVE",
+      "review_verdict": "DISCARD"
+    },
+    "exp_002": {
+      "exp_id": "exp_002",
+      "parent": "exp_000",
+      "depth": 1,
+      "architecture_class": "tree_based",
+      "model": "hist_gbt",
+      "config_hash": "c4c96b3bd47606cf7c842ca85b17dd3b56bdc3a47c6eeedcac4cc81183b20c19",
+      "sha": "54b6ee611dea2194331be3922ec123823f9de3c0e99c266d32b5f47f888b3f5d",
+      "status": "DONE",
+      "metrics": {
+        "log_loss": 0.570763543116363,
+        "accuracy": 0.8275774826059457,
+        "train_log_loss": 0.0383505952307476
+      },
+      "trainable_params": 91500,
+      "hypothesis": "Gradient-boosted trees capture the non-linear lab interactions (Bilirubin/Albumin/Prothrombin) the linear model cannot; UCI original rows augment the rare CL class.",
+      "worktree_path": ".auto-trainer/worktrees/exp_002/",
+      "fold_log_losses": [
+        0.5670910099086212,
+        0.561786432697213,
+        0.5632562421766608,
+        0.5664516928742385,
+        0.5952323379250817
+      ],
+      "config_delta_key": "model_type",
+      "cv_folds": 5,
+      "evaluate_verdict": "REJECT",
+      "review_verdict": "DISCARD"
+    },
+    "exp_003": {
+      "exp_id": "exp_003",
+      "parent": "exp_000",
+      "depth": 1,
+      "architecture_class": "catboost",
+      "model": "catboost",
+      "config_hash": "9d8e58ba9bcd47bdec99879c02124a28de671c12dc64a1ca215bd58c8b8e7309",
+      "sha": "84a9d716774a402c63ca8029dc04255ba03e4d79c7bdbab54ccbf606660c9a30",
+      "status": "DONE",
+      "metrics": {
+        "log_loss": 0.4460471026260555,
+        "accuracy": 0.8309930423782416,
+        "train_log_loss": 0.34595826549974346
+      },
+      "trainable_params": 51200,
+      "hypothesis": "CatBoost handles the 6 clinical categoricals natively with ordered target statistics, avoiding one-hot information loss; expected strongest single model.",
+      "worktree_path": ".auto-trainer/worktrees/exp_003/",
+      "fold_log_losses": [
+        0.4396144486806491,
+        0.4493362897384373,
+        0.43752583707190096,
+        0.44517324116052526,
+        0.4585856964787648
+      ],
+      "config_delta_key": "model_type",
+      "cv_folds": 5,
+      "evaluate_verdict": "ACCEPT",
+      "review_verdict": "DISCARD"
+    },
+    "exp_004": {
+      "exp_id": "exp_004",
+      "parent": "exp_000",
+      "depth": 1,
+      "architecture_class": "knn",
+      "model": "knn",
+      "config_hash": "cbdd002c6529750ee6008866be8f2108b8b9912f5f04396956f357228e5df16b",
+      "sha": "f246bdb60815e34922a6da364d56624e33a95431b4fe29843999532178643696",
+      "status": "DONE",
+      "metrics": {
+        "log_loss": 0.9618748962739976,
+        "accuracy": 0.804427577482606,
+        "train_log_loss": 0.0007722306778462093
+      },
+      "trainable_params": 424473,
+      "hypothesis": "Distance-weighted KNN tests whether local similarity in standardized lab space carries signal; expected to be dominated but required for class coverage.",
+      "worktree_path": ".auto-trainer/worktrees/exp_004/",
+      "fold_log_losses": [
+        1.013672147358372,
+        0.9786573817097182,
+        0.860267265570682,
+        0.9301150121401693,
+        1.0266626745910465
+      ],
+      "config_delta_key": "model_type",
+      "cv_folds": 5,
+      "evaluate_verdict": "REJECT",
+      "review_verdict": "DISCARD"
+    },
+    "exp_005": {
+      "exp_id": "exp_005",
+      "parent": "exp_000",
+      "depth": 1,
+      "architecture_class": "svm",
+      "model": "svm",
+      "config_hash": "ff7d7af56f2f8915917094b254672e2a9e4cc72270c4a649ed44930b239f6280",
+      "sha": "7f6292683a741597f470e4b34f899d94777d6b1feb464ce0e96e423c4d532f83",
+      "status": "DONE",
+      "metrics": {
+        "log_loss": 0.5080963314954619,
+        "accuracy": 0.8136622390891841,
+        "train_log_loss": 0.44199828581666434
+      },
+      "trainable_params": 197370,
+      "hypothesis": "An RBF-kernel SVM probes a non-linear decision boundary distinct from trees; required for architecture coverage.",
+      "worktree_path": ".auto-trainer/worktrees/exp_005/",
+      "fold_log_losses": [
+        0.4886845194287317,
+        0.49955798317312666,
+        0.514187281949932,
+        0.49778434538784966,
+        0.5402675275376693
+      ],
+      "config_delta_key": "model_type",
+      "cv_folds": 5,
+      "evaluate_verdict": "REJECT",
+      "review_verdict": "DISCARD"
+    },
+    "exp_006": {
+      "exp_id": "exp_006",
+      "parent": "exp_001",
+      "depth": 2,
+      "architecture_class": "linear",
+      "model": "logistic_regression",
+      "config_hash": "708b44e4d1317decf8922e5c60e42c502b0cc13e2561c51e58337654b688de07",
+      "sha": "c8ed829c93c9e34273040a80c8c79885510f5ef0d7e6b6c811797951045ec391",
+      "status": "DONE",
+      "metrics": {
+        "log_loss": 0.5012240176270786,
+        "accuracy": 0.8075901328273245,
+        "train_log_loss": 0.49015214313557376
+      },
+      "trainable_params": 144,
+      "hypothesis": "Weaker regularization (C=2.0) is the third linear refinement; linear is near its ceiling so this probes diminishing returns.",
+      "worktree_path": ".auto-trainer/worktrees/exp_006/",
+      "fold_log_losses": [
+        0.4783131828687813,
+        0.5108083271264018,
+        0.4909946759331073,
+        0.5093052279519649,
+        0.5166986742551376
+      ],
+      "config_delta_key": "C",
+      "cv_folds": 5,
+      "evaluate_verdict": "INCONCLUSIVE",
+      "review_verdict": "DISCARD"
+    },
+    "exp_007": {
+      "exp_id": "exp_007",
+      "parent": "exp_003",
+      "depth": 2,
+      "architecture_class": "catboost",
+      "model": "catboost",
+      "config_hash": "7183af5fa9e37cc22311df5f5daad69882708a9e5e4dd43a33dd6d81307a873b",
+      "sha": "75ee0d547c0ea0a5eb8ec03dd2fcdcec48fe6f5080e4b60b29c8f548a3acde6f",
+      "status": "DONE",
+      "metrics": {
+        "log_loss": 0.44762185880092314,
+        "accuracy": 0.8306135357368754,
+        "train_log_loss": 0.2765699374383368
+      },
+      "trainable_params": 256000,
+      "hypothesis": "More iterations at lower learning rate with deeper trees and stronger L2 refines the best single model toward its optimum.",
+      "worktree_path": ".auto-trainer/worktrees/exp_007/",
+      "fold_log_losses": [
+        0.44404901877830316,
+        0.4520131195145676,
+        0.43697891285945994,
+        0.44579511395414256,
+        0.4592731288981424
+      ],
+      "config_delta_key": "iterations",
+      "cv_folds": 5,
+      "evaluate_verdict": "ACCEPT",
+      "review_verdict": "DISCARD"
+    },
+    "exp_008": {
+      "exp_id": "exp_008",
+      "parent": "exp_002",
+      "depth": 2,
+      "architecture_class": "tree_based",
+      "model": "lightgbm",
+      "config_hash": "0c89bd5a1b1f04f3c09521fc8f3603c9682b62904e5ed1f89d1a65b0bd16240c",
+      "sha": "9ae79b5b7f05fd657914995fc03181f46bc62216942776b6e84e4b8f5ecafb29",
+      "status": "DONE",
+      "metrics": {
+        "log_loss": 0.4755407001699891,
+        "accuracy": 0.8340290955091714,
+        "train_log_loss": 0.12856109707000923
+      },
+      "trainable_params": 146400,
+      "hypothesis": "A regularized LightGBM with low learning rate replaces the overfit hist_gbt, giving the tree class a competitive, ensemble-diverse member.",
+      "worktree_path": ".auto-trainer/worktrees/exp_008/",
+      "fold_log_losses": [
+        0.47367752180290396,
+        0.471697843245421,
+        0.46245602884007453,
+        0.4768874823787431,
+        0.49298462458280295
+      ],
+      "config_delta_key": "model_type",
+      "cv_folds": 5,
+      "evaluate_verdict": "ACCEPT",
+      "review_verdict": "DISCARD"
+    },
+    "exp_009": {
+      "exp_id": "exp_009",
+      "parent": "exp_008",
+      "depth": 3,
+      "architecture_class": "tree_based",
+      "model": "xgboost",
+      "config_hash": "3ca8cbb5ca3a842b062ac96db205635b790399c8a0495c75b9343f023954e3b1",
+      "sha": "fcbb8c2164a9359c52ca6d69c1489d542223970163fbd60ddd080df1f25522a4",
+      "status": "DONE",
+      "metrics": {
+        "log_loss": 0.4423367574094934,
+        "accuracy": 0.8345351043643264,
+        "train_log_loss": 0.2902578528110117
+      },
+      "trainable_params": 67628,
+      "hypothesis": "XGBoost with shallow depth and column subsampling offers a decorrelated tree learner for the ensemble and tests tree-class depth refinement.",
+      "worktree_path": ".auto-trainer/worktrees/exp_009/",
+      "fold_log_losses": [
+        0.4395056605838168,
+        0.4430132727323177,
+        0.4309141191276815,
+        0.44097486926581253,
+        0.45727586533783815
+      ],
+      "config_delta_key": "model_type",
+      "cv_folds": 5,
+      "evaluate_verdict": "ACCEPT",
+      "review_verdict": "DISCARD"
+    },
+    "exp_010": {
+      "exp_id": "exp_010",
+      "parent": "exp_007",
+      "depth": 3,
+      "architecture_class": "catboost",
+      "model": "catboost",
+      "config_hash": "15fdefa849f529a418bc0a4b64ff48573f92fc0864c079c0f121914356275447",
+      "sha": "5b691f67e37f187e84a39eb5f0efc8cb8eb10b1be0966d92a3d7242c38c9e230",
+      "status": "DONE",
+      "metrics": {
+        "log_loss": 0.4462889504291354,
+        "accuracy": 0.8292220113851992,
+        "train_log_loss": 0.3252567992199897
+      },
+      "trainable_params": 96000,
+      "hypothesis": "Shallower depth-6 trees with more L2 probes the catboost optimum; expected within 1% of prior depths, testing diminishing returns.",
+      "worktree_path": ".auto-trainer/worktrees/exp_010/",
+      "fold_log_losses": [
+        0.4421734785354258,
+        0.44976055324205677,
+        0.43624343249480985,
+        0.4442659265020013,
+        0.4590013613713834
+      ],
+      "config_delta_key": "depth",
+      "cv_folds": 5,
+      "evaluate_verdict": "ACCEPT",
+      "review_verdict": "DISCARD"
+    },
+    "exp_011": {
+      "exp_id": "exp_011",
+      "parent": "exp_009",
+      "depth": 4,
+      "architecture_class": "tree_based",
+      "model": "xgboost",
+      "config_hash": "41a6cf2454d4728d69dda5382cff27fb63ef891ecc05ef1a042341da740ca5fb",
+      "sha": "06e9c01df66180b5c8a2ba3c51d45ce3b0c7de686a0650219a41f55b76035a4f",
+      "status": "DONE",
+      "metrics": {
+        "log_loss": 0.44874778264301135,
+        "accuracy": 0.83617963314358,
+        "train_log_loss": 0.20685719691990404
+      },
+      "trainable_params": 182144,
+      "hypothesis": "Lower learning rate with more estimators and slightly deeper trees refines the leading XGBoost toward its optimum.",
+      "worktree_path": ".auto-trainer/worktrees/exp_011/",
+      "fold_log_losses": [
+        0.4470732277961974,
+        0.44936974733334967,
+        0.435008672464039,
+        0.4472313480624058,
+        0.4650559175590653
+      ],
+      "config_delta_key": "n_estimators",
+      "cv_folds": 5,
+      "evaluate_verdict": "ACCEPT",
+      "review_verdict": "DISCARD"
+    },
+    "exp_012": {
+      "exp_id": "exp_012",
+      "parent": "exp_011",
+      "depth": 5,
+      "architecture_class": "tree_based",
+      "model": "lightgbm",
+      "config_hash": "981df6d90f989f9345240e1f4604281ff3be527c07ef610db209ad96309a0405",
+      "sha": "f840bdc691d781582b40c5fc9118ea94cb928824e68a892b8b953f722e85ae38",
+      "status": "DONE",
+      "metrics": {
+        "log_loss": 0.46705727848060974,
+        "accuracy": 0.8325110689437065,
+        "train_log_loss": 0.15767336851869868
+      },
+      "trainable_params": 169200,
+      "hypothesis": "A tuned LightGBM at the same low learning rate gives the tree class a third deep refinement and a decorrelated ensemble member.",
+      "worktree_path": ".auto-trainer/worktrees/exp_012/",
+      "fold_log_losses": [
+        0.4632713238012144,
+        0.46536104565664055,
+        0.45414231217178896,
+        0.46780788040315274,
+        0.4847038303702524
+      ],
+      "config_delta_key": "model_type",
+      "cv_folds": 5,
+      "evaluate_verdict": "ACCEPT",
+      "review_verdict": "DISCARD"
+    },
+    "exp_013": {
+      "exp_id": "exp_013",
+      "parent": "exp_012",
+      "depth": 6,
+      "architecture_class": "tree_based",
+      "model": "xgboost",
+      "config_hash": "2afade0f6325bb38d1eb68f00be5d229e0cb3983e8de2acbc59340ccbef72026",
+      "sha": "7877e254d9a97879a916c73aaeab90f44f8032ecf4fda57c0edf1069e7c7a045",
+      "status": "DONE",
+      "metrics": {
+        "log_loss": 0.4439107808370753,
+        "accuracy": 0.832258064516129,
+        "train_log_loss": 0.2894851304261529
+      },
+      "trainable_params": 67762,
+      "hypothesis": "Return tree refinement to the depth-3 optimum config under a new seed to confirm the tree class has settled (diminishing returns).",
+      "worktree_path": ".auto-trainer/worktrees/exp_013/",
+      "fold_log_losses": [
+        0.3963520594251516,
+        0.45411842561645593,
+        0.45413222383039736,
+        0.4676078454053877,
+        0.4473433499079841
+      ],
+      "config_delta_key": "reg_lambda",
+      "cv_folds": 5,
+      "evaluate_verdict": "ACCEPT",
+      "review_verdict": "DISCARD"
+    },
+    "exp_014": {
+      "exp_id": "exp_014",
+      "parent": "exp_013",
+      "depth": 7,
+      "architecture_class": "tree_based",
+      "model": "xgboost",
+      "config_hash": "5d9268f84bb2d198df1b73f6518e17b6889b3755206f546779d2fe5d80aee468",
+      "sha": "520efa9f25eea1dabe0caa93938a0dd6a589f42472eaee59793aed95b7f0134b",
+      "status": "DONE",
+      "metrics": {
+        "log_loss": 0.4424704179337591,
+        "accuracy": 0.8350411132194814,
+        "train_log_loss": 0.2916054171473854
+      },
+      "trainable_params": 67980,
+      "hypothesis": "Marginal L2 increase at the settled optimum; expected within 1% of the prior two tree depths.",
+      "worktree_path": ".auto-trainer/worktrees/exp_014/",
+      "fold_log_losses": [
+        0.4500261299344822,
+        0.4504445404261092,
+        0.43529646050426685,
+        0.4491641235902793,
+        0.4274208352136577
+      ],
+      "config_delta_key": "reg_lambda",
+      "cv_folds": 5,
+      "evaluate_verdict": "ACCEPT",
+      "review_verdict": "DISCARD"
+    },
+    "exp_015": {
+      "exp_id": "exp_015",
+      "parent": "exp_014",
+      "depth": 8,
+      "architecture_class": "tree_based",
+      "model": "xgboost",
+      "config_hash": "3f9135e76421fd8743b62ebe676735bdef5ace20c9a23beba55e7949cc2df145",
+      "sha": "c3ce541262d5b80f7f72656490340978eb980ebb98d696b36f428e35a6cd0c98",
+      "status": "DONE",
+      "metrics": {
+        "log_loss": 0.44451006523591025,
+        "accuracy": 0.8331435800126502,
+        "train_log_loss": 0.28660488907572496
+      },
+      "trainable_params": 67342,
+      "hypothesis": "Third settled-optimum tree refinement; confirms the last three tree depths agree within 1% and the class is exhausted.",
+      "worktree_path": ".auto-trainer/worktrees/exp_015/",
+      "fold_log_losses": [
+        0.4351678949514089,
+        0.4591827666008261,
+        0.45574885254795977,
+        0.43405160239310875,
+        0.43839920968624757
+      ],
+      "config_delta_key": "reg_lambda",
+      "cv_folds": 5,
+      "evaluate_verdict": "ACCEPT",
+      "review_verdict": "DISCARD"
+    }
+  },
+  "pareto_front": [
+    "exp_003",
+    "exp_007",
+    "exp_008",
+    "exp_009",
+    "exp_010",
+    "exp_011",
+    "exp_012",
+    "exp_013",
+    "exp_014",
+    "exp_015"
+  ],
+  "pareto_history": [
+    [
+      "exp_000"
+    ],
+    [
+      "exp_001",
+      "exp_003"
+    ],
+    [
+      "exp_001",
+      "exp_003",
+      "exp_009"
+    ],
+    [
+      "exp_001",
+      "exp_003",
+      "exp_009"
+    ],
+    [
+      "exp_001",
+      "exp_003",
+      "exp_009",
+      "exp_015"
+    ],
+    [
+      "exp_001",
+      "exp_003",
+      "exp_009",
+      "exp_015"
+    ]
+  ],
+  "class_status": {
+    "catboost": {
+      "status": "EXHAUSTED",
+      "best": 0.4460471026260555,
+      "depth": 3
+    },
+    "knn": {
+      "status": "EXHAUSTED",
+      "best": 0.9618748962739976,
+      "depth": 1
+    },
+    "linear": {
+      "status": "EXHAUSTED",
+      "best": 0.5008638385057704,
+      "depth": 2
+    },
+    "svm": {
+      "status": "EXHAUSTED",
+      "best": 0.5080963314954619,
+      "depth": 1
+    },
+    "tree_based": {
+      "status": "EXHAUSTED",
+      "best": 0.4423367574094934,
+      "depth": 8
+    }
+  },
+  "global_status": "CONVERGED"
+}

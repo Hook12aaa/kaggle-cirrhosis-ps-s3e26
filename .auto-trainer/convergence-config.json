@@ -1,0 +1,5 @@
+{
+  "architecture_classes_minimum": 3,
+  "pareto_stability_rounds": 2,
+  "max_depth": 3
+}

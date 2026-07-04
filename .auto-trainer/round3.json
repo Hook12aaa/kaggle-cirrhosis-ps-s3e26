@@ -1,0 +1,17 @@
+[
+  {"exp_id": "exp_010", "parent_id": "exp_007", "parent_desc": "catboost tuned d2",
+   "architecture_class": "catboost", "model_type": "catboost",
+   "hyperparameters": {"iterations": 1500, "learning_rate": 0.025, "depth": 6, "l2_leaf_reg": 6.0},
+   "use_original": true, "config_delta_key": "depth",
+   "hypothesis": "Shallower depth-6 trees with more L2 probes the catboost optimum; expected within 1% of prior depths, testing diminishing returns."},
+  {"exp_id": "exp_011", "parent_id": "exp_009", "parent_desc": "xgboost d3 best",
+   "architecture_class": "tree_based", "model_type": "xgboost",
+   "hyperparameters": {"n_estimators": 1200, "learning_rate": 0.015, "max_depth": 5, "subsample": 0.85, "colsample_bytree": 0.85, "reg_lambda": 3.0},
+   "use_original": true, "config_delta_key": "n_estimators",
+   "hypothesis": "Lower learning rate with more estimators and slightly deeper trees refines the leading XGBoost toward its optimum."},
+  {"exp_id": "exp_012", "parent_id": "exp_011", "parent_desc": "xgboost refined d4",
+   "architecture_class": "tree_based", "model_type": "lightgbm",
+   "hyperparameters": {"n_estimators": 1200, "learning_rate": 0.015, "num_leaves": 24, "subsample": 0.85, "colsample_bytree": 0.85, "reg_lambda": 3.0},
+   "use_original": true, "config_delta_key": "model_type",
+   "hypothesis": "A tuned LightGBM at the same low learning rate gives the tree class a third deep refinement and a decorrelated ensemble member."}
+]

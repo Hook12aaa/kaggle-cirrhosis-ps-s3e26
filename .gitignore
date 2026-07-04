@@ -1,0 +1,9 @@
+train.csv
+test.csv
+sample_submission.csv
+*.npy
+__pycache__/
+.venv/
+.claude/
+.auto-trainer-output.log
+.DS_Store

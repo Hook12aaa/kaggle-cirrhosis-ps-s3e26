@@ -1,0 +1,22 @@
+[
+  {"exp_id": "exp_006", "parent_id": "exp_001", "parent_desc": "linear C=0.5",
+   "architecture_class": "linear", "model_type": "logistic_regression",
+   "hyperparameters": {"C": 2.0, "max_iter": 3000}, "use_original": false,
+   "config_delta_key": "C",
+   "hypothesis": "Weaker regularization (C=2.0) is the third linear refinement; linear is near its ceiling so this probes diminishing returns."},
+  {"exp_id": "exp_007", "parent_id": "exp_003", "parent_desc": "catboost default",
+   "architecture_class": "catboost", "model_type": "catboost",
+   "hyperparameters": {"iterations": 2000, "learning_rate": 0.02, "depth": 7, "l2_leaf_reg": 5.0},
+   "use_original": true, "config_delta_key": "iterations",
+   "hypothesis": "More iterations at lower learning rate with deeper trees and stronger L2 refines the best single model toward its optimum."},
+  {"exp_id": "exp_008", "parent_id": "exp_002", "parent_desc": "hist_gbt overfit",
+   "architecture_class": "tree_based", "model_type": "lightgbm",
+   "hyperparameters": {"n_estimators": 800, "learning_rate": 0.02, "num_leaves": 31, "subsample": 0.8, "colsample_bytree": 0.8, "reg_lambda": 2.0},
+   "use_original": true, "config_delta_key": "model_type",
+   "hypothesis": "A regularized LightGBM with low learning rate replaces the overfit hist_gbt, giving the tree class a competitive, ensemble-diverse member."},
+  {"exp_id": "exp_009", "parent_id": "exp_008", "parent_desc": "lightgbm",
+   "architecture_class": "tree_based", "model_type": "xgboost",
+   "hyperparameters": {"n_estimators": 800, "learning_rate": 0.02, "max_depth": 4, "subsample": 0.8, "colsample_bytree": 0.8, "reg_lambda": 2.0},
+   "use_original": true, "config_delta_key": "model_type",
+   "hypothesis": "XGBoost with shallow depth and column subsampling offers a decorrelated tree learner for the ensemble and tests tree-class depth refinement."}
+]
